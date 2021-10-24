@@ -48,7 +48,8 @@
     "prettier/prettier": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "react/require-default-props": "off"
   },
   "settings": {
     "import/resolver": {
