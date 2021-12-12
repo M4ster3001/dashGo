@@ -1,38 +1,38 @@
-import React from 'react';
-import { Flex, SimpleGrid, Box, Text } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
-import Header from '@components/Header';
-import { Sidebar } from '@components/Sidebar';
-import { theme } from 'styles/theme';
+import React from 'react'
+import { Flex, SimpleGrid, Box, Text } from '@chakra-ui/react'
+import dynamic from 'next/dynamic'
+import Header from '@components/Header'
+import { Sidebar } from '@components/Sidebar'
+import { theme } from 'styles/theme'
 
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const options = {
   chart: {
     toolbar: {
-      show: false,
+      show: false
     },
     zoom: {
-      enabled: false,
+      enabled: false
     },
-    foreColor: theme.colors.gray[500],
+    foreColor: theme.colors.gray[500]
   },
   grid: {
-    show: false,
+    show: false
   },
   dataLabels: {
-    enabled: false,
+    enabled: false
   },
   tooltip: {
-    enabled: false,
+    enabled: false
   },
   xaxis: {
     type: 'datetime' as const,
     axisBorder: {
-      color: theme.colors.gray[600],
+      color: theme.colors.gray[600]
     },
     axisTicks: {
-      color: theme.colors.gray[600],
+      color: theme.colors.gray[600]
     },
     categories: [
       '2021-03-18T00:00:00.000Z',
@@ -42,8 +42,8 @@ const options = {
       '2021-03-22T00:00:00.000Z',
       '2021-03-23T00:00:00.000Z',
       '2021-03-24T00:00:00.000Z',
-      '2021-03-25T00:00:00.000Z',
-    ],
+      '2021-03-25T00:00:00.000Z'
+    ]
   },
   fill: {
     opacity: 0.3,
@@ -51,17 +51,17 @@ const options = {
     gradient: {
       shade: 'dark',
       opacityFrom: 0.7,
-      opacityTo: 0.3,
-    },
-  },
-};
+      opacityTo: 0.3
+    }
+  }
+}
 
 const series = [
   {
     name: 'series1',
-    data: [21, 10, 100, 5, 50, 30, 444, 22],
-  },
-];
+    data: [21, 10, 100, 5, 50, 30, 444, 22]
+  }
+]
 
 export default function Dashboard() {
   return (
@@ -89,5 +89,5 @@ export default function Dashboard() {
         </SimpleGrid>
       </Flex>
     </Flex>
-  );
+  )
 }

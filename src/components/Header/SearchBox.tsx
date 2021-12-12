@@ -1,13 +1,13 @@
-import { Flex, Input, Icon } from '@chakra-ui/react';
-import React, { useRef, useState } from 'react';
-import { RiSearchLine } from 'react-icons/ri';
+import { Flex, Input, Icon } from '@chakra-ui/react'
+import React, { useRef, useState } from 'react'
+import { RiSearchLine } from 'react-icons/ri'
 
 // controlled components
 // uncontrolled components
 
 export default function SearchBox() {
-  const [search, setSearch] = useState('');
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const [search, setSearch] = useState('')
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   // searchInput.current.focus() (Imperativo)
 
@@ -37,5 +37,5 @@ export default function SearchBox() {
 
       <Icon as={RiSearchLine} fontSize="20" />
     </Flex>
-  );
+  )
 }

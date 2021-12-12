@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react';
-import { Box, Stack, Text } from '@chakra-ui/react';
+import React, { ReactNode } from 'react'
+import { Box, Stack, Text } from '@chakra-ui/react'
 
 interface NavSectionProps {
-  title: string;
-  children: ReactNode;
+  title: string
+  children: ReactNode
 }
 
 export function NavSection({ title, children }: NavSectionProps) {
@@ -21,5 +21,5 @@ export function NavSection({ title, children }: NavSectionProps) {
         {children}
       </Stack>
     </Box>
-  );
+  )
 }

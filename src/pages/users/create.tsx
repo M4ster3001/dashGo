@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Box,
   Button,
@@ -7,22 +7,22 @@ import {
   Heading,
   HStack,
   SimpleGrid,
-  VStack,
-} from '@chakra-ui/react';
-import { Input } from '@components/Form/Input';
-import Header from '@components/Header';
-import { Sidebar } from '@components/Sidebar';
-import Link from 'next/link';
-import * as yup from 'yup';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+  VStack
+} from '@chakra-ui/react'
+import { Input } from '@components/Form/Input'
+import Header from '@components/Header'
+import { Sidebar } from '@components/Sidebar'
+import Link from 'next/link'
+import * as yup from 'yup'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 type CreateFormData = {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-};
+  name: string
+  email: string
+  password: string
+  passwordConfirmation: string
+}
 
 const createUserSchema = yup.object().shape({
   name: yup.string().required('Nome obrigatório'),
@@ -31,25 +31,25 @@ const createUserSchema = yup.object().shape({
     .string()
     .required('Senha obrigatória')
     .min(6, 'A senha precisa ter no mínimo 6 caracteres'),
-  passwordConfirmation: yup.string().oneOf([null, yup.ref('password')]),
-});
+  passwordConfirmation: yup.string().oneOf([null, yup.ref('password')])
+})
 
 export default function CreateUser() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting }
   } = useForm({
-    resolver: yupResolver(createUserSchema),
-  });
+    resolver: yupResolver(createUserSchema)
+  })
 
   const handleCreateUser: SubmitHandler<CreateFormData> = async (
     values,
-    event,
+    event
   ) => {
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log(values);
-  };
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    console.log(values)
+  }
 
   return (
     <Box>
@@ -115,5 +115,5 @@ export default function CreateUser() {
         </Box>
       </Flex>
     </Box>
-  );
+  )
 }

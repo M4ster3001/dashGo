@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from 'react';
+import React from 'react'
 import {
   Box,
   Button,
@@ -15,48 +15,29 @@ import {
   Th,
   Thead,
   Tr,
-  useBreakpointValue,
-} from '@chakra-ui/react';
-import Header from '@components/Header';
-import Pagination from '@components/Pagination';
-import { Sidebar } from '@components/Sidebar';
-import { RiAddLine, RiPencilLine } from 'react-icons/ri';
-import Link from 'next/link';
-import { useQuery } from 'react-query';
+  useBreakpointValue
+} from '@chakra-ui/react'
+import Header from '@components/Header'
+import Pagination from '@components/Pagination'
+import { Sidebar } from '@components/Sidebar'
+import { RiAddLine, RiPencilLine } from 'react-icons/ri'
+import Link from 'next/link'
+import { useUsers } from '@services/hooks/useUsers'
 
 type User = {
-  id: string;
-  name: string;
-  email: string;
-  createdAt: string;
-};
+  id: string
+  name: string
+  email: string
+  createdAt: string
+}
 
 export default function UserList() {
-  const { data, isLoading, error } = useQuery('users', async () => {
-    const response = await fetch('http://localhost:3000/localAPI/users');
-    const respJson = await response.json();
+  const { data, isLoading, isFetching, error } = useUsers()
 
-    const users = respJson.users.map((user: User) => {
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        createAt: new Date(user.createdAt).toLocaleDateString('pt-BR', {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric',
-        }),
-      };
-    });
-
-    return users;
-  });
-
-  // const [usersList, setUsersList] = useState<User[]>([]);
   const isWideVersion = useBreakpointValue({
     base: false,
-    lg: true,
-  });
+    lg: true
+  })
 
   return (
     <Box>
@@ -83,7 +64,7 @@ export default function UserList() {
             </Link>
           </Flex>
 
-          {isLoading ? (
+          {isLoading || isFetching ? (
             <Flex justify="center">
               <Spinner />
             </Flex>
@@ -145,5 +126,5 @@ export default function UserList() {
         </Box>
       </Flex>
     </Box>
-  );
+  )
 }

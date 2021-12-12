@@ -1,8 +1,8 @@
-import { Flex, Text, Box, Avatar } from '@chakra-ui/react';
-import React from 'react';
+import { Flex, Text, Box, Avatar } from '@chakra-ui/react'
+import React from 'react'
 
 interface ProfileProps {
-  showProfileData?: boolean;
+  showProfileData?: boolean
 }
 
 export default function Profile({ showProfileData = true }: ProfileProps) {
@@ -21,5 +21,5 @@ export default function Profile({ showProfileData = true }: ProfileProps) {
 
       <Avatar size="md" name="Aldo" src="" />
     </Flex>
-  );
+  )
 }
