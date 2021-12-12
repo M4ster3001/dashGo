@@ -1,11 +1,11 @@
 import { api } from '@services/api'
-import { useQuery } from 'react-query'
+import { useQuery, UseQueryResult } from 'react-query'
 
 type User = {
   id: string
   name: string
   email: string
-  createdAt: string
+  created_at: string
 }
 
 type GetUsersResponse = {
@@ -27,7 +27,7 @@ export async function getUsers(page: number): Promise<GetUsersResponse> {
       id: user.id,
       name: user.name,
       email: user.email,
-      createAt: new Date(user.createdAt).toLocaleDateString('pt-BR', {
+      createAt: new Date(user.created_at).toLocaleDateString('pt-BR', {
         day: '2-digit',
         month: 'long',
         year: 'numeric'
@@ -38,8 +38,10 @@ export async function getUsers(page: number): Promise<GetUsersResponse> {
   return { users, totalCount }
 }
 
-export function useUsers(page: number) {
+export function useUsers(
+  page: number
+): UseQueryResult<GetUsersResponse, unknown> {
   return useQuery(['users', page], () => getUsers(page), {
-    staleTime: 1000 * 60 * 30 // 30 minutes
+    staleTime: 1000 * 60 * 10 // 10 minutes
   })
 }
