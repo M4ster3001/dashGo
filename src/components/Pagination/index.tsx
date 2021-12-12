@@ -52,12 +52,18 @@ export default function Pagination({
         <strong>{totalCountOfRegisters}</strong>
       </Box>
       <Stack direction="row" spacing="2">
-        {currentPage > 1 + siblingsCount && <PaginationItem number={1} />}
+        {currentPage > 1 + siblingsCount && (
+          <PaginationItem onPageChange={onPageChange} number={1} />
+        )}
 
         {previousPages.length > 0 &&
           previousPages.map((page, key: React.Key) => (
             <>
-              <PaginationItem key={key} number={page} />
+              <PaginationItem
+                onPageChange={onPageChange}
+                key={key}
+                number={page}
+              />
               {currentPage > 2 + siblingsCount && (
                 <Text color="gray.300" width={8} textAlign={'center'}>
                   ...
@@ -66,11 +72,19 @@ export default function Pagination({
             </>
           ))}
 
-        <PaginationItem number={currentPage} isCurrent />
+        <PaginationItem
+          onPageChange={onPageChange}
+          number={currentPage}
+          isCurrent
+        />
 
         {nextPages.length > 0 &&
           nextPages.map((page, key: React.Key) => (
-            <PaginationItem key={key} number={page} />
+            <PaginationItem
+              onPageChange={onPageChange}
+              key={key}
+              number={page}
+            />
           ))}
 
         {currentPage + siblingsCount < lastPage && (
@@ -80,7 +94,7 @@ export default function Pagination({
                 ...
               </Text>
             )}
-            <PaginationItem number={lastPage} />
+            <PaginationItem onPageChange={onPageChange} number={lastPage} />
           </>
         )}
       </Stack>

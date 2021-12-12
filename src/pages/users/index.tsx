@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Button,
@@ -32,7 +32,8 @@ type User = {
 }
 
 export default function UserList() {
-  const { data, isLoading, isFetching, error } = useUsers()
+  const [page, setPage] = useState(1)
+  const { data, isLoading, isFetching, error } = useUsers(page)
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -87,8 +88,8 @@ export default function UserList() {
                 </Thead>
 
                 <Tbody>
-                  {data &&
-                    data.map((user: User) => (
+                  {data?.users &&
+                    data.users.map((user: User) => (
                       <Tr key={user.id}>
                         <Td px={['4', '4', '6']}>
                           <Checkbox colorScheme="pink" />
@@ -121,9 +122,11 @@ export default function UserList() {
               </Table>
 
               <Pagination
-                totalCountOfRegisters={200}
-                currentPage={5}
-                onPageChange={() => {}}
+                totalCountOfRegisters={
+                  data && data.totalCount > 0 ? data.totalCount : 0
+                }
+                currentPage={page}
+                onPageChange={setPage}
               />
             </>
           )}
