@@ -23,9 +23,10 @@ import Pagination from '@components/Pagination'
 import { Sidebar } from '@components/Sidebar'
 import { RiAddLine, RiPencilLine } from 'react-icons/ri'
 import NextLink from 'next/link'
-import { useUsers } from '@services/hooks/useUsers'
+import { getUsers, useUsers } from '@services/hooks/useUsers'
 import { queryClient } from '@services/queryClient'
 import { api } from '@services/api'
+import { GetServerSideProps } from 'next'
 
 type User = {
   id: string
@@ -34,9 +35,16 @@ type User = {
   created_at: string
 }
 
-export default function UserList() {
+type UserListProps = {
+  users: Omit<User, 'id'>[]
+  totalCount: number
+}
+
+export default function UserList({ users, totalCount }: UserListProps) {
   const [page, setPage] = useState(1)
-  const { data, isLoading, isFetching, error } = useUsers(page)
+  const { data, isLoading, isFetching, error } = useUsers(page, {
+    initialData: { users, totalCount }
+  })
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -105,9 +113,9 @@ export default function UserList() {
                 </Thead>
 
                 <Tbody>
-                  {data?.users &&
-                    data.users.map((user: User) => (
-                      <Tr key={user.id}>
+                  {data &&
+                    data.users.map((user: User, key: React.Key) => (
+                      <Tr key={key}>
                         <Td px={['4', '4', '6']}>
                           <Checkbox colorScheme="pink" />
                         </Td>
@@ -156,4 +164,15 @@ export default function UserList() {
       </Flex>
     </Box>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { users, totalCount } = await getUsers(1)
+
+  return {
+    props: {
+      users,
+      totalCount
+    }
+  }
 }
